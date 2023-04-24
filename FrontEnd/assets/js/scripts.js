@@ -21,3 +21,11 @@ function loadDataWorks(dataWorks) {
     figureElm.appendChild(figcaptionElm);
   }
 }
+
+fetch("http://localhost:5678/api/categories")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
