@@ -226,13 +226,16 @@ li:hover {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   white-space: nowrap;
-  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
-.btn_filter-all,
+.btn_filter-all {
+  color: white;
+  background-color: #1d6154;
+}
 .btn_filter:hover {
   color: white;
   background-color: #1d6154;
-  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 .gallery {
   width: 100%;
