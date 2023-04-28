@@ -1,17 +1,10 @@
 /***********************************  WORKS ******************************************/
 
+/* recuperer les données WORKS de l'API */
 const response = await fetch("http://localhost:5678/api/works");
 const works = await response.json();
 
-// fetch("http://localhost:5678/api/works")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-//     loadDataWorks(data);
-//   });
-
+/* Fonction qui permet la creation de la gallery dynamiquement*/
 function loadDataWorks(dataWorks) {
   document.querySelector(".gallery").innerHTML = "";
   for (let i = 0; i < dataWorks.length; i++) {
@@ -32,6 +25,7 @@ loadDataWorks(works);
 
 /***********************************  CATEGORIES ******************************************/
 
+/* recuperer les données CATEGORIES de l'API */
 fetch("http://localhost:5678/api/categories")
   .then(function (response) {
     return response.json();
@@ -41,6 +35,7 @@ fetch("http://localhost:5678/api/categories")
     loadDataCategorie(data);
   });
 
+/* fonction qui permet la creation des boutons dynamiquement*/
 function loadDataCategorie(dataCategorie) {
   const filterContainer = document.createElement("div");
   const portfolioContainer = document.querySelector("#portfolio");
@@ -57,36 +52,17 @@ function loadDataCategorie(dataCategorie) {
     loadDataWorks(works);
   });
 
-  const btnId0 = document.createElement("button");
-  btnId0.classList.add("btn_filter");
-  btnId0.textContent = dataCategorie[0].name;
-  filterContainer.appendChild(btnId0);
-  btnId0.addEventListener("click", function () {
-    const btnId0Filter = works.filter(function (dataFilter) {
-      return dataFilter.category.name === "Objets";
+  /* boucle for pour eviter de repeter du code*/
+  for (let i = 0; i < dataCategorie.length; i++) {
+    const btnId = document.createElement("button");
+    btnId.classList.add("btn_filter");
+    btnId.textContent = dataCategorie[i].name;
+    filterContainer.appendChild(btnId);
+    btnId.addEventListener("click", function () {
+      const btnIdFilter = works.filter(function (dataFilter) {
+        return dataFilter.category.id === dataCategorie[i].id;
+      });
+      loadDataWorks(btnIdFilter);
     });
-    loadDataWorks(btnId0Filter);
-  });
-
-  const btnId1 = document.createElement("button");
-  btnId1.classList.add("btn_filter");
-  btnId1.textContent = dataCategorie[1].name;
-  filterContainer.appendChild(btnId1);
-  btnId1.addEventListener("click", function () {
-    const btnId1Filter = works.filter(function (dataFilter) {
-      return dataFilter.category.name === "Appartements";
-    });
-    loadDataWorks(btnId1Filter);
-  });
-
-  const btnId2 = document.createElement("button");
-  btnId2.classList.add("btn_filter");
-  btnId2.textContent = dataCategorie[2].name;
-  filterContainer.appendChild(btnId2);
-  btnId2.addEventListener("click", function () {
-    const btnId2Filter = works.filter(function (dataFilter) {
-      return dataFilter.category.name === "Hotels & restaurants";
-    });
-    loadDataWorks(btnId2Filter);
-  });
+  }
 }
