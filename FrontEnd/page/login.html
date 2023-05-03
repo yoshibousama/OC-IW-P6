@@ -11,6 +11,7 @@
  <meta name="description" content="">
  <link rel="stylesheet" href="/FrontEnd/assets/css/login.css">
  <script type="module" src="/FrontEnd/assets/js/login.js"></script>
+
  <title>Document</title>
 </head>
 
@@ -31,11 +32,12 @@
    <h2>Login</h2>
    <form action="#" method="post">
     <label for="email">E-mail</label>
-    <input type="email" name="email" id="email">
+    <input type="email" name="email" id="email" required>
     <label for="password">Mot de passe</label>
-    <input type="password" name="password" id="password">
+    <input type="password" name="password" id="password" required>
     <input type="submit" value="Se connecter">
-    <a href="#" class="forgot_psw">Mot de passe oublié</a>
+    <p class="error"></p>
+    <a href="#" class="forgot_password">Mot de passe oublié</a>
    </form>
   </section>
  </main>
@@ -46,6 +48,7 @@
    </ul>
   </nav>
  </footer>
+
 </body>
 
 </html>

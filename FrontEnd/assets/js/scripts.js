@@ -44,7 +44,7 @@ function loadDataCategorie(dataCategorie) {
     .insertAdjacentElement("afterend", filterContainer);
 
   const btnAll = document.createElement("button");
-  btnAll.classList.add("btn_filter", "btn_filter-all");
+  btnAll.classList.add("btn_filter-all");
   btnAll.textContent = "Tous";
   filterContainer.appendChild(btnAll);
   filterContainer.classList.add("filter_container");
@@ -59,6 +59,8 @@ function loadDataCategorie(dataCategorie) {
     btnId.textContent = dataCategorie[i].name;
     filterContainer.appendChild(btnId);
     btnId.addEventListener("click", function () {
+      btnAll.classList.remove("btn_filter-all");
+      btnAll.classList.add("btn_filter");
       const btnIdFilter = works.filter(function (dataFilter) {
         return dataFilter.category.id === dataCategorie[i].id;
       });
