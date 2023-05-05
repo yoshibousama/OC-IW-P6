@@ -16,9 +16,7 @@ logForm.addEventListener("submit", async function (e) {
   if (response.ok) {
     window.location.href = "../index.html";
     const data = await response.json();
-    const token = data.token;
-    const tokenData = JSON.stringify(token);
-    window.sessionStorage.setItem("token", tokenData);
+    window.sessionStorage.setItem("token", data);
   } else {
     const logError = document.querySelector(".error");
     logError.textContent = "Les informations sont incorrects";
