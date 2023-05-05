@@ -1,6 +1,6 @@
 /***********************************  WORKS ******************************************/
 
-/* recuperer les données WORKS de l'API */
+/* fetch la route WORKS de l'API */
 const response = await fetch("http://localhost:5678/api/works");
 const works = await response.json();
 
@@ -25,7 +25,7 @@ loadDataWorks(works);
 
 /***********************************  CATEGORIES ******************************************/
 
-/* recuperer les données CATEGORIES de l'API */
+/* fetch la route CATEGORIES de l'API */
 fetch("http://localhost:5678/api/categories")
   .then(function (response) {
     return response.json();
