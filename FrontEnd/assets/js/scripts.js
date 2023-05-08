@@ -40,7 +40,7 @@ function loadDataCategorie(dataCategorie) {
   const filterContainer = document.createElement("div");
   const portfolioContainer = document.querySelector("#portfolio");
   portfolioContainer
-    .querySelector("h2")
+    .querySelector(".portfolio_edit")
     .insertAdjacentElement("afterend", filterContainer);
 
   const btnAll = document.createElement("button");
@@ -51,7 +51,11 @@ function loadDataCategorie(dataCategorie) {
   btnAll.addEventListener("click", function () {
     loadDataWorks(works);
   });
-
+  if (tokenGet !== null) {
+    filterContainer.remove();
+    const portfolioEdit = document.querySelector(".portfolio_edit");
+    portfolioEdit.style.marginBlock = "139px 90px";
+  }
   /* boucle for pour eviter de repeter du code*/
   for (let i = 0; i < dataCategorie.length; i++) {
     const btnId = document.createElement("button");
@@ -67,4 +71,38 @@ function loadDataCategorie(dataCategorie) {
       loadDataWorks(btnIdFilter);
     });
   }
+}
+
+/***********************************  ADMIN ******************************************/
+
+// Récupération du token et variables des éléments pour le mode admin
+const tokenGet = window.localStorage.getItem("token");
+let log = document.querySelector(".login");
+let modal = null;
+let adminBanner = null;
+let modificationBtn = null;
+
+// Fonction pour logout
+function logOut(e) {
+  localStorage.clear();
+}
+
+// si la condition est vrai alors remplace login par logout, rend visible la bar admin et les liens "modifier"
+if (tokenGet !== null) {
+  log.innerHTML = " ";
+  log.innerHTML = "logout";
+  log.addEventListener("click", logOut);
+
+  const adminBanner = document.querySelector(".admin_banner");
+  adminBanner.style.display = null;
+  adminBanner.removeAttribute("aria-hidden");
+
+  const editImg = document.querySelector(".introduction_edit-img");
+  editImg.style.display = null;
+  editImg.removeAttribute("aria-hidden");
+  const editGallery = document.querySelector(".portfolio_edit-gallery");
+  editGallery.style.display = null;
+  editGallery.removeAttribute("aria-hidden");
+} else if (tokenGet == null) {
+  log.innerHTML = "login";
 }

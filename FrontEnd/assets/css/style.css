@@ -137,6 +137,33 @@ body {
   margin: 0 auto;
   max-width: 1140px;
 }
+.admin_banner {
+  background: black;
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 59px;
+  margin-bottom: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.admin_edit-text a {
+  color: white;
+  text-decoration: none;
+  padding-inline: 12px 21px;
+}
+.admin_banner button {
+  background-color: white;
+  padding: 11px 23px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
 header {
   display: flex;
   justify-content: space-between;
@@ -207,8 +234,23 @@ li a:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
+.introduction_edit-img {
+  margin: 15px auto 0;
+  width: 80%;
+}
+.introduction_edit-img a,
+.portfolio_edit-gallery a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 #portfolio h2 {
-  text-align: center;
+  margin-right: 31px;
+}
+.portfolio_edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1em;
 }
 .filter_container {

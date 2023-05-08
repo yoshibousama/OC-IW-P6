@@ -9,19 +9,31 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/css/style.css">
 	<script type="module" src="assets/js/scripts.js"></script>
 </head>
 
 <body>
+
+	<div class="admin_banner" aria-hidden="true" style="display: none;">
+		<div class="admin_edit">
+			<div class="admin_edit-text">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<a href="#">Mode édition</a>
+			</div>
+		</div>
+		<button>publier les changements</button>
+	</div>
+
 	<header>
 		<h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="page/login.html">login</a></li>
+				<li><a href="page/login.html" class="login">login</a></li>
 				<li><img src="./assets/icons/instagram.png" class="nav_social" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -30,6 +42,10 @@
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<div class="introduction_edit-img" aria-hidden="true" style="display: none">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<a href="#">Modifier</a>
+				</div>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -43,7 +59,13 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="portfolio_edit">
+				<h2>Mes Projets</h2>
+				<div class="portfolio_edit-gallery" aria-hidden="true" style="display: none">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<a href="#">Modifier</a>
+				</div>
+			</div>
 			<div class="gallery">
 			</div>
 		</section>
