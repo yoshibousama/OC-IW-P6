@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
 	<div class="admin_banner" aria-hidden="true" style="display: none;">
 		<div class="admin_edit">
 			<div class="admin_edit-text">
@@ -26,7 +25,6 @@
 		</div>
 		<button>publier les changements</button>
 	</div>
-
 	<header>
 		<h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -48,6 +46,10 @@
 				</div>
 			</figure>
 			<article>
+				<div class="introduction_edit-article" aria-hidden="true" style="display: none;">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<a href="#">Mode édition</a>
+				</div>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
@@ -63,11 +65,55 @@
 				<h2>Mes Projets</h2>
 				<div class="portfolio_edit-gallery" aria-hidden="true" style="display: none">
 					<i class="fa-regular fa-pen-to-square"></i>
-					<a href="#">Modifier</a>
+					<a href="#modal_1">Modifier</a>
 				</div>
 			</div>
 			<div class="gallery">
 			</div>
+
+			<aside id="modal_1" class="modal" aria-hidden="true" role="dialog" style="display: none;">
+				<div class="modal_wrapper" id="modal_wrapper-1">
+					<button class="modal_close-btn" id="modal_close-btn-1"><i class="fas fa-times"></i></button>
+					<h2 class="modal_title">Galerie photo</h2>
+					<div class="modal_gallery">
+					</div>
+					<div class="modal_btn-edit">
+						<button class="modal_add-photo">Ajouter une photo</button>
+						<button class="modal_delete-gallery">Supprimer la galerie</button>
+					</div>
+				</div>
+			</aside>
+
+			<aside class="modal" id="modal_2" aria-hidden="true" role="dialog" style="display: none;">
+				<div class="modal_wrapper" id="modal_wrapper-2">
+					<button class="modal_return-btn"><i class="fa-solid fa-arrow-left"></i></button>
+					<button class="modal_close-btn" id="modal_close-btn-2"><i class="fas fa-times"></i></button>
+					<h2 class="modal_title">Ajout photo</h2>
+					<form class="modal_form">
+						<div class="modal_get-photo">
+							<div class="modal_preview" style="display: none;">
+								<img class="modal_preview-photo">
+							</div>
+							<i class="fa-regular fa-image"></i>
+							<label for="modal_formPhoto" class="modal_add-btn">+ Ajouter photo</label>
+							<input type="file" name="image" accept=".jpg, .jpeg, .png" id="modal_formPhoto" required>
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<label for="modal_titleForm">Titre</label>
+						<input type="text" required name="title" id="modal_titleForm">
+						<label for="modal_categorieForm">Catégorie</label>
+						<select name="category" id="modal_categorieForm">
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
+						<div class="modal_btn-form">
+							<input type="submit" value="Valider" class="modal_confirm-photo">
+						</div>
+					</form>
+
+				</div>
+			</aside>
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>

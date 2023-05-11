@@ -238,7 +238,11 @@ li a:hover {
   margin: 15px auto 0;
   width: 80%;
 }
+.introduction_edit-article {
+  margin-bottom: 19px;
+}
 .introduction_edit-img a,
+.introduction_edit-article a,
 .portfolio_edit-gallery a {
   color: black;
   text-decoration: none;
@@ -309,6 +313,7 @@ li a:hover {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+  position: relative;
 }
 .gallery img {
   width: 100%;
@@ -367,4 +372,176 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em 0 2em 0;
+}
+
+/***********************************  MODAL ******************************************/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_wrapper {
+  width: 630px;
+  height: 731px;
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.modal_title {
+  color: black;
+  font-size: 26px;
+  text-align: center;
+  font-family: "Work Sans";
+  font-weight: 400;
+  line-height: 30.5px;
+  margin-bottom: 48px;
+}
+
+.modal_close-btn {
+  align-self: flex-end;
+  border: none;
+  background-color: white;
+  font-size: 18px;
+}
+
+.modal_gallery {
+  width: 70%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  overflow: auto;
+  align-self: center;
+}
+
+.modal_gallery figure {
+  width: 80px;
+  height: 142px;
+  position: relative;
+}
+.modal_gallery figure button {
+  color: white;
+  font-size: 10px;
+  background-color: black;
+  border-radius: 2px;
+  position: absolute;
+  border: none;
+  top: 5px;
+  right: 5px;
+}
+.modal_gallery img {
+  object-fit: cover;
+  width: 100%;
+  height: 105px;
+}
+.modal_btn-edit,
+.modal_btn-form {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  border-top: solid 1px #b3b3b3;
+  padding-top: 15px;
+  width: 500px;
+}
+.modal_btn-form {
+  width: 100%;
+  margin-top: 50px;
+}
+.modal_add-photo {
+  background-color: #1d6154;
+  width: 250px;
+  height: 35px;
+  font-family: "Syne";
+  line-height: 17px;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  margin-block: 23px;
+  align-self: center;
+  cursor: pointer;
+}
+.modal_confirm-photo {
+  height: 36px;
+  width: 237px;
+  border: none;
+  font-size: 1.2em;
+}
+.modal_delete-gallery {
+  color: red;
+  font-family: "Work Sans";
+  font-size: 1em;
+  width: 250px;
+  height: 35px;
+  align-self: center;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.modal_return-btn {
+  align-self: flex-start;
+  position: absolute;
+  background: white;
+  border: none;
+  font-size: 18px;
+}
+.modal_form {
+  width: 450px;
+  align-self: center;
+  margin-bottom: 50px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.modal_get-photo {
+  background-color: #e8f1f6;
+  border-radius: 4px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.modal_preview {
+  position: absolute;
+  background-color: #e8f1f6;
+  width: 100%;
+  height: 220px;
+}
+#modal_formPhoto {
+  display: none;
+}
+.modal_get-photo .fa-image {
+  font-size: 80px;
+  color: #b9c5cc;
+}
+.modal_add-btn {
+  border-radius: 30px;
+  background-color: #cbd6dc;
+  padding: 15px 50px;
+  font-size: 20px;
+  color: #306685;
+  cursor: pointer;
+  margin: 20px 10px;
+}
+.modal_form label {
+  margin: 15px 10px;
+}
+#modal_titleForm {
+  height: 40px;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  font-family: "Work Sans";
+}
+#modal_categorieForm {
+  height: 40px;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }

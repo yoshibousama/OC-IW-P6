@@ -75,23 +75,41 @@ function loadDataCategorie(dataCategorie) {
 
 /***********************************  ADMIN ******************************************/
 
-// Récupération du token et variables des éléments pour le mode admin
+// Récupération du token pour le mode admin
 const tokenGet = window.localStorage.getItem("token");
-let log = document.querySelector(".login");
-let modal = null;
-let adminBanner = null;
-let modificationBtn = null;
 
-// Fonction pour logout
-function logOut(e) {
-  localStorage.clear();
+// fonction qui permet la creation de la gallery modal
+function loadDataModal(works) {
+  const modalGallery = document.querySelector(".modal_gallery");
+  modalGallery.innerText = "";
+  for (let i = 0; i < works.length; i++) {
+    const modalFigureElm = document.createElement("figure");
+    const modalImgElm = document.createElement("img");
+    modalImgElm.src = works[i].imageUrl;
+    modalImgElm.alt = works[i].title;
+    const modalCaptionElm = document.createElement("figcaption");
+    modalCaptionElm.innerText = "éditer";
+    const modalDeleteElm = document.createElement("button");
+    modalDeleteElm.className = "btn_delete";
+    const modalLogoDeleteElm = document.createElement("i");
+    modalLogoDeleteElm.className = "far fa-trash-alt";
+    modalGallery.appendChild(modalFigureElm);
+    modalFigureElm.appendChild(modalImgElm);
+    modalFigureElm.appendChild(modalCaptionElm);
+    modalFigureElm.appendChild(modalDeleteElm);
+    modalDeleteElm.appendChild(modalLogoDeleteElm);
+  }
 }
 
-// si la condition est vrai alors remplace login par logout, rend visible la bar admin et les liens "modifier"
+// condition pour etre en mode admin
 if (tokenGet !== null) {
-  log.innerHTML = " ";
-  log.innerHTML = "logout";
-  log.addEventListener("click", logOut);
+  const login = document.querySelector(".login");
+  login.innerText = "logout";
+  login.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.localStorage.removeItem("token");
+    window.location.replace("./index.html");
+  });
 
   const adminBanner = document.querySelector(".admin_banner");
   adminBanner.style.display = null;
@@ -100,9 +118,64 @@ if (tokenGet !== null) {
   const editImg = document.querySelector(".introduction_edit-img");
   editImg.style.display = null;
   editImg.removeAttribute("aria-hidden");
+  const editArticle = document.querySelector(".introduction_edit-article");
+  editArticle.style.display = null;
+  editArticle.removeAttribute("aria-hidden");
   const editGallery = document.querySelector(".portfolio_edit-gallery");
   editGallery.style.display = null;
   editGallery.removeAttribute("aria-hidden");
-} else if (tokenGet == null) {
-  log.innerHTML = "login";
+
+  // open modal 1
+  editGallery.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modalTarget = document.querySelector("#modal_1");
+    modalTarget.style.display = null;
+  });
+
+  loadDataModal(works);
+
+  // open modal 2
+  const modalAddPhoto = document.querySelector(".modal_add-photo");
+  modalAddPhoto.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modal1 = document.querySelector("#modal_1");
+    modal1.style.display = "none";
+    const modal2 = document.querySelector("#modal_2");
+    modal2.style.display = null;
+  });
+
+  // retourne modal 1
+  const modalReturnBtn = document.querySelector(".modal_return-btn");
+  modalReturnBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modal1 = document.querySelector("#modal_1");
+    modal1.style.display = null;
+    const modal2 = document.querySelector("#modal_2");
+    modal2.style.display = "none";
+    modalFormPhoto.value = "";
+  });
+
+  // close modal
+  document.querySelector("#modal_1").addEventListener("click", function (e) {
+    const modal1 = document.querySelector("#modal_1");
+    if (
+      !e.target.closest("#modal_wrapper-1") ||
+      e.target.closest("#modal_close-btn-1")
+    ) {
+      modal1.style.display = "none";
+    }
+  });
+  document.querySelector("#modal_2").addEventListener("click", function (e) {
+    const modal2 = document.querySelector("#modal_2");
+    if (
+      !e.target.closest("#modal_wrapper-2") ||
+      e.target.closest("#modal_close-btn-2")
+    ) {
+      modal2.style.display = "none";
+      modalFormPhoto.value = "";
+      const modalPreview = document.querySelector(".modal_preview");
+      modalPreview.setAttribute("style", "display: none");
+      modalTitleForm.value = "";
+    }
+  });
 }
