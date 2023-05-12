@@ -152,7 +152,6 @@ if (tokenGet !== null) {
     modal1.style.display = null;
     const modal2 = document.querySelector("#modal_2");
     modal2.style.display = "none";
-    modalFormPhoto.value = "";
   });
 
   // close modal
@@ -172,10 +171,8 @@ if (tokenGet !== null) {
       e.target.closest("#modal_close-btn-2")
     ) {
       modal2.style.display = "none";
-      modalFormPhoto.value = "";
       const modalPreview = document.querySelector(".modal_preview");
       modalPreview.setAttribute("style", "display: none");
-      modalTitleForm.value = "";
     }
   });
 }
