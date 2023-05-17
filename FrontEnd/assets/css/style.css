@@ -426,7 +426,7 @@ footer nav ul {
   height: 142px;
   position: relative;
 }
-.modal_gallery figure button {
+.btn_delete {
   color: white;
   font-size: 10px;
   background-color: black;
@@ -435,6 +435,17 @@ footer nav ul {
   border: none;
   top: 5px;
   right: 5px;
+  cursor: pointer;
+}
+.btn_move {
+  color: white;
+  font-size: 10px;
+  background-color: black;
+  border-radius: 2px;
+  position: absolute;
+  border: none;
+  bottom: 428px;
+  right: 120px;
 }
 .modal_gallery img {
   object-fit: cover;
@@ -499,6 +510,9 @@ footer nav ul {
   display: flex;
   flex-direction: column;
 }
+.modal_form:invalid input[type="submit"] {
+  background-color: #a7a7a7;
+}
 .modal_get-photo {
   background-color: #e8f1f6;
   border-radius: 4px;
@@ -514,6 +528,14 @@ footer nav ul {
   background-color: #e8f1f6;
   width: 100%;
   height: 220px;
+}
+.modal_preview-photo {
+  object-fit: cover;
+  height: 100%;
+  max-width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #modal_formPhoto {
   display: none;

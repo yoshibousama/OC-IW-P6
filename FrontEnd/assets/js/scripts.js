@@ -91,6 +91,7 @@ function loadDataModal(works) {
     modalCaptionElm.innerText = "éditer";
     const modalDeleteElm = document.createElement("button");
     modalDeleteElm.className = "btn_delete";
+    modalDeleteElm.classList = "btn_delete";
     const modalLogoDeleteElm = document.createElement("i");
     modalLogoDeleteElm.className = "far fa-trash-alt";
     modalGallery.appendChild(modalFigureElm);
@@ -99,6 +100,15 @@ function loadDataModal(works) {
     modalFigureElm.appendChild(modalDeleteElm);
     modalDeleteElm.appendChild(modalLogoDeleteElm);
   }
+  const modalFigureElm = document.createElement("figure");
+  const modalMoveElm = document.createElement("button");
+  modalMoveElm.className = "btn_move";
+  modalMoveElm.classList = "btn_move";
+  const modalLogoMoveElm = document.createElement("i");
+  modalLogoMoveElm.className = "fas fa-arrows-alt";
+  modalGallery.appendChild(modalFigureElm);
+  modalFigureElm.appendChild(modalMoveElm);
+  modalMoveElm.appendChild(modalLogoMoveElm);
 }
 
 // condition pour etre en mode admin
@@ -152,6 +162,20 @@ if (tokenGet !== null) {
     modal1.style.display = null;
     const modal2 = document.querySelector("#modal_2");
     modal2.style.display = "none";
+  });
+
+  // Aperçu photo
+  const modalFormPhoto = document.querySelector("#modal_formPhoto");
+  modalFormPhoto.addEventListener("change", function (e) {
+    if (e.target.files[0].size > 4000000) {
+      return;
+    }
+    console.log(e);
+    let file = e.target.files[0];
+    let url = URL.createObjectURL(file);
+    document.querySelector(".modal_preview-photo").src = url;
+    const modalPreview = document.querySelector(".modal_preview");
+    modalPreview.style.display = null;
   });
 
   // close modal
