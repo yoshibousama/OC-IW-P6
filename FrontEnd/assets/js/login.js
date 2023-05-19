@@ -15,14 +15,13 @@ logForm.addEventListener("submit", async function (e) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(logUser),
   });
-  console.log(response);
 
   /* si la condition est vrai alors redirige vers page d'accueil sinon affiche un message d'erreur */
   if (response.ok) {
     window.location.href = "../index.html";
     const data = await response.json();
-    const token = JSON.stringify(data);
-    window.localStorage.setItem("token", token);
+    console.log(data);
+    window.sessionStorage.setItem("token", data.token);
   } else {
     const logError = document.querySelector(".error");
     logError.textContent = "Les informations sont incorrects";
