@@ -444,10 +444,10 @@ footer nav ul {
   font-size: 10px;
   background-color: black;
   border-radius: 2px;
-  position: absolute;
+  position: fixed;
+  top: 86px;
+  left: 277px;
   border: none;
-  bottom: 428px;
-  right: 120px;
 }
 .modal_gallery img {
   object-fit: cover;

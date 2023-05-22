@@ -18,10 +18,10 @@ logForm.addEventListener("submit", async function (e) {
 
   /* si la condition est vrai alors redirige vers page d'accueil sinon affiche un message d'erreur */
   if (response.ok) {
-    window.location.href = "../index.html";
     const data = await response.json();
     console.log(data);
     window.sessionStorage.setItem("token", data.token);
+    window.location.href = "../index.html";
   } else {
     const logError = document.querySelector(".error");
     logError.textContent = "Les informations sont incorrects";

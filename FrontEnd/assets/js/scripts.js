@@ -101,6 +101,39 @@ if (window.sessionStorage.getItem("token") !== null) {
   editGallery.style.display = null;
   editGallery.removeAttribute("aria-hidden");
 
+  // fonction qui permet la creation de la gallery modal
+  function loadDataModal(works) {
+    const modalGallery = document.querySelector(".modal_gallery");
+    modalGallery.innerText = "";
+    for (let i = 0; i < works.length; i++) {
+      const modalFigureElm = document.createElement("figure");
+      const modalImgElm = document.createElement("img");
+      modalImgElm.src = works[i].imageUrl;
+      modalImgElm.alt = works[i].title;
+      const modalCaptionElm = document.createElement("figcaption");
+      modalCaptionElm.innerText = "éditer";
+      const modalDeleteElm = document.createElement("button");
+      modalDeleteElm.className = "btn_delete";
+      modalDeleteElm.classList = "btn_delete";
+      const modalLogoDeleteElm = document.createElement("i");
+      modalLogoDeleteElm.className = "far fa-trash-alt";
+      modalGallery.appendChild(modalFigureElm);
+      modalFigureElm.appendChild(modalImgElm);
+      modalFigureElm.appendChild(modalCaptionElm);
+      modalFigureElm.appendChild(modalDeleteElm);
+      modalDeleteElm.appendChild(modalLogoDeleteElm);
+    }
+    const modalFigureElm = document.createElement("figure");
+    const modalMoveElm = document.createElement("button");
+    modalMoveElm.className = "btn_move";
+    modalMoveElm.classList = "btn_move";
+    const modalLogoMoveElm = document.createElement("i");
+    modalLogoMoveElm.className = "fas fa-arrows-alt";
+    modalGallery.appendChild(modalFigureElm);
+    modalFigureElm.appendChild(modalMoveElm);
+    modalMoveElm.appendChild(modalLogoMoveElm);
+  }
+
   // open modal 1
   editGallery.addEventListener("click", function (e) {
     e.preventDefault();
@@ -122,7 +155,7 @@ if (window.sessionStorage.getItem("token") !== null) {
   // preview photo dans la modal 2
   const modalFormPhoto = document.querySelector("#modal_formPhoto");
   modalFormPhoto.addEventListener("change", function (e) {
-    // console.log(e);
+    console.log(e);
     if (e.target.files[0].size > 4000000) {
       return;
     }
@@ -188,6 +221,8 @@ if (window.sessionStorage.getItem("token") !== null) {
   });
 
   // close modal
+
+  // revisiter le code
   document.querySelector("#modal_1").addEventListener("click", function (e) {
     const modal1 = document.querySelector("#modal_1");
     if (
@@ -208,37 +243,4 @@ if (window.sessionStorage.getItem("token") !== null) {
       modalPreview.setAttribute("style", "display: none");
     }
   });
-}
-
-// fonction qui permet la creation de la gallery modal
-function loadDataModal(works) {
-  const modalGallery = document.querySelector(".modal_gallery");
-  modalGallery.innerText = "";
-  for (let i = 0; i < works.length; i++) {
-    const modalFigureElm = document.createElement("figure");
-    const modalImgElm = document.createElement("img");
-    modalImgElm.src = works[i].imageUrl;
-    modalImgElm.alt = works[i].title;
-    const modalCaptionElm = document.createElement("figcaption");
-    modalCaptionElm.innerText = "éditer";
-    const modalDeleteElm = document.createElement("button");
-    modalDeleteElm.className = "btn_delete";
-    modalDeleteElm.classList = "btn_delete";
-    const modalLogoDeleteElm = document.createElement("i");
-    modalLogoDeleteElm.className = "far fa-trash-alt";
-    modalGallery.appendChild(modalFigureElm);
-    modalFigureElm.appendChild(modalImgElm);
-    modalFigureElm.appendChild(modalCaptionElm);
-    modalFigureElm.appendChild(modalDeleteElm);
-    modalDeleteElm.appendChild(modalLogoDeleteElm);
-  }
-  const modalFigureElm = document.createElement("figure");
-  const modalMoveElm = document.createElement("button");
-  modalMoveElm.className = "btn_move";
-  modalMoveElm.classList = "btn_move";
-  const modalLogoMoveElm = document.createElement("i");
-  modalLogoMoveElm.className = "fas fa-arrows-alt";
-  modalGallery.appendChild(modalFigureElm);
-  modalFigureElm.appendChild(modalMoveElm);
-  modalMoveElm.appendChild(modalLogoMoveElm);
 }
