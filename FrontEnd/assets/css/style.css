@@ -444,9 +444,9 @@ footer nav ul {
   font-size: 10px;
   background-color: black;
   border-radius: 2px;
-  position: fixed;
-  top: 90px;
-  left: 758px;
+  position: absolute;
+  top: 5px;
+  left: 25px;
   border: none;
 }
 .modal_gallery img {

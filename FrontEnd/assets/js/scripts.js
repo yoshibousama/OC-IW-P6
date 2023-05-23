@@ -121,16 +121,17 @@ if (window.sessionStorage.getItem("token") !== null) {
       modalFigureElm.appendChild(modalCaptionElm);
       modalFigureElm.appendChild(modalDeleteElm);
       modalDeleteElm.appendChild(modalLogoDeleteElm);
+
+      // const modalFigureMove = document.querySelector(".modal_gallery figure");
+      // modalFigureMove = modalWorks.id(1);
+      // console.log(modalFigureMove);
+      // const modalMoveElm = document.createElement("button");
+      // modalMoveElm.className = "btn_move";
+      // const modalLogoMoveElm = document.createElement("i");
+      // modalLogoMoveElm.className = "fas fa-arrows-alt";
+      // modalFigureMove.append(modalMoveElm);
+      // modalMoveElm.append(modalLogoMoveElm);
     }
-    const modalFigureElm = document.createElement("figure");
-    const modalMoveElm = document.createElement("button");
-    modalMoveElm.className = "btn_move";
-    modalMoveElm.classList = "btn_move";
-    const modalLogoMoveElm = document.createElement("i");
-    modalLogoMoveElm.className = "fas fa-arrows-alt";
-    modalGallery.appendChild(modalFigureElm);
-    modalFigureElm.appendChild(modalMoveElm);
-    modalMoveElm.appendChild(modalLogoMoveElm);
   }
 
   // open modal 1
