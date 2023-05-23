@@ -243,6 +243,29 @@ if (window.sessionStorage.getItem("token") !== null) {
     }
   }
 
+  // Supprimer la gallery
+  function deleteGallery() {
+    for (let i = 0; i < works.length; i++) {
+      const id = works[i].id;
+      fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + window.sessionStorage.getItem("token"),
+          Accept: "application/json",
+        },
+      });
+      const gallery = document.querySelector(".gallery");
+      gallery.innerText = "";
+      const modalGallery = document.querySelector(".modal_gallery");
+      modalGallery.innerText = "";
+      loadDataModal(works);
+      loadDataWorks(works);
+    }
+  }
+  document
+    .querySelector(".modal_delete-gallery")
+    .addEventListener("click", deleteGallery);
+
   // close modal
   document.querySelector("#modal_1").addEventListener("click", function (e) {
     const modal1 = document.querySelector("#modal_1");
