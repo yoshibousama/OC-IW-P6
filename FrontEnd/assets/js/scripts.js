@@ -4,7 +4,6 @@
 let works = await fetch("http://localhost:5678/api/works").then((works) =>
   works.json()
 );
-// console.log(works);
 
 /* Fonction qui permet la creation de la gallery dynamiquement*/
 function loadDataWorks(works) {
@@ -31,7 +30,6 @@ loadDataWorks(works);
 let categories = await fetch("http://localhost:5678/api/categories").then(
   (categories) => categories.json()
 );
-// console.log(categories);
 loadDataCategorie(categories);
 
 /* fonction qui permet la creation des boutons dynamiquement*/
@@ -106,15 +104,16 @@ if (window.sessionStorage.getItem("token") !== null) {
     const modalGallery = document.querySelector(".modal_gallery");
     modalGallery.innerText = "";
     for (let i = 0; i < works.length; i++) {
+      const modalWorks = works[i];
       const modalFigureElm = document.createElement("figure");
       const modalImgElm = document.createElement("img");
-      modalImgElm.src = works[i].imageUrl;
-      modalImgElm.alt = works[i].title;
+      modalImgElm.src = modalWorks.imageUrl;
+      modalImgElm.alt = modalWorks.title;
       const modalCaptionElm = document.createElement("figcaption");
       modalCaptionElm.innerText = "éditer";
       const modalDeleteElm = document.createElement("button");
       modalDeleteElm.className = "btn_delete";
-      modalDeleteElm.classList = "btn_delete";
+      modalDeleteElm.id = `delete_${modalWorks.id}`;
       const modalLogoDeleteElm = document.createElement("i");
       modalLogoDeleteElm.className = "far fa-trash-alt";
       modalGallery.appendChild(modalFigureElm);
@@ -141,6 +140,7 @@ if (window.sessionStorage.getItem("token") !== null) {
     modal1.style.display = null;
   });
   loadDataModal(works);
+  deleteProject();
 
   // open modal 2
   const modalAddPhoto = document.querySelector(".modal_add-photo");
@@ -189,7 +189,7 @@ if (window.sessionStorage.getItem("token") !== null) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
+        Authorization: "Bearer " + window.sessionStorage.getItem("token"),
       },
       body: formData,
     });
@@ -208,6 +208,7 @@ if (window.sessionStorage.getItem("token") !== null) {
 
     loadDataWorks(works);
     loadDataModal(works);
+    deleteProject();
   });
 
   // retourne modal 1
@@ -220,9 +221,29 @@ if (window.sessionStorage.getItem("token") !== null) {
     modal2.style.display = "none";
   });
 
-  // close modal
+  // Supprimer une photo
+  function deleteProject() {
+    const deleteProject = document.getElementsByClassName("btn_delete");
+    for (let i = 0; i < deleteProject.length; i++) {
+      deleteProject[i].addEventListener("click", async function (e) {
+        e.preventDefault();
+        const id = deleteProject[i].id.split("_")[1];
+        await fetch(`http://localhost:5678/api/works/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem("token"),
+            Accept: "application/json",
+          },
+        });
+        const gallery = document.querySelector(".gallery");
+        gallery.innerText = "";
+        loadDataModal(works);
+        loadDataWorks(works);
+      });
+    }
+  }
 
-  // revisiter le code
+  // close modal
   document.querySelector("#modal_1").addEventListener("click", function (e) {
     const modal1 = document.querySelector("#modal_1");
     if (
