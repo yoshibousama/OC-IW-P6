@@ -87,17 +87,13 @@ if (window.sessionStorage.getItem("token") !== null) {
   // la bannière top
   const adminBanner = document.querySelector(".admin_banner");
   adminBanner.style.display = null;
-  adminBanner.removeAttribute("aria-hidden");
   // les boutons modifier
   const editImg = document.querySelector(".introduction_edit-img");
   editImg.style.display = null;
-  editImg.removeAttribute("aria-hidden");
   const editArticle = document.querySelector(".introduction_edit-article");
   editArticle.style.display = null;
-  editArticle.removeAttribute("aria-hidden");
   const editGallery = document.querySelector(".portfolio_edit-gallery");
   editGallery.style.display = null;
-  editGallery.removeAttribute("aria-hidden");
 
   // fonction qui permet la creation de la gallery modal
   function loadDataModal(works) {
@@ -153,6 +149,16 @@ if (window.sessionStorage.getItem("token") !== null) {
     modal2.style.display = null;
   });
 
+  // retourne modal 1
+  const modalReturnBtn = document.querySelector(".modal_return-btn");
+  modalReturnBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modal1 = document.querySelector("#modal_1");
+    modal1.style.display = null;
+    const modal2 = document.querySelector("#modal_2");
+    modal2.style.display = "none";
+  });
+
   // preview photo dans la modal 2
   const modalFormPhoto = document.querySelector("#modal_formPhoto");
   modalFormPhoto.addEventListener("change", function (e) {
@@ -168,59 +174,49 @@ if (window.sessionStorage.getItem("token") !== null) {
   });
 
   // Bouton add photo
-  const modalConfirmPhoto = document.querySelector(".modal_confirm-photo");
 
-  modalConfirmPhoto.addEventListener("click", async function (e) {
-    e.preventDefault();
+  document
+    .querySelector(".modal_form")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    // Récupérer les données des inputs pour la création du nouvel élément
-    const modalInputImg = document.getElementById("modal_formPhoto").files[0];
-    const modalInputTitle = document.getElementById("modal_titleForm").value;
-    const modalInputCategorie = document.getElementById(
-      "modal_categorieForm"
-    ).value;
+      // Récupérer les données des inputs pour la création du nouvel élément
+      const modalInputImg = document.getElementById("modal_formPhoto").files[0];
+      const modalInputTitle = document.getElementById("modal_titleForm").value;
+      const modalInputCategorie = document.getElementById(
+        "modal_categorieForm"
+      ).value;
 
-    // Création du formData à envoyer
-    const formData = new FormData();
-    formData.append("image", modalInputImg);
-    formData.append("title", modalInputTitle);
-    formData.append("category", modalInputCategorie);
+      // Création du formData à envoyer
+      const formData = new FormData();
+      formData.append("image", modalInputImg);
+      formData.append("title", modalInputTitle);
+      formData.append("category", modalInputCategorie);
 
-    let response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + window.sessionStorage.getItem("token"),
-      },
-      body: formData,
+      let response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + window.sessionStorage.getItem("token"),
+        },
+        body: formData,
+      });
+      console.log(response);
+      const modalPreview = document.querySelector(".modal_preview");
+      modalPreview.setAttribute("style", "display: none");
+      const modalPreviewPhoto = document.querySelector(".modal_preview-photo");
+      modalPreviewPhoto.src = "";
+      const modal2 = document.querySelector("#modal_2");
+      modal2.style.display = "none";
+      const gallery = document.querySelector(".gallery");
+      gallery.innerText = "";
+      const modalGallery = document.querySelector(".modal_gallery");
+      modalGallery.innerText = "";
+
+      loadDataWorks(works);
+      loadDataModal(works);
+      deleteProject();
     });
-    console.log(response);
-
-    const modalPreview = document.querySelector(".modal_preview");
-    modalPreview.setAttribute("style", "display: none");
-    const modalPreviewPhoto = document.querySelector(".modal_preview-photo");
-    modalPreviewPhoto.src = "";
-    const modal2 = document.querySelector("#modal_2");
-    modal2.style.display = "none";
-    const gallery = document.querySelector(".gallery");
-    gallery.innerText = "";
-    const modalGallery = document.querySelector(".modal_gallery");
-    modalGallery.innerText = "";
-
-    loadDataWorks(works);
-    loadDataModal(works);
-    deleteProject();
-  });
-
-  // retourne modal 1
-  const modalReturnBtn = document.querySelector(".modal_return-btn");
-  modalReturnBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    const modal1 = document.querySelector("#modal_1");
-    modal1.style.display = null;
-    const modal2 = document.querySelector("#modal_2");
-    modal2.style.display = "none";
-  });
 
   // Supprimer une photo
   function deleteProject() {
