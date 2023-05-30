@@ -1,10 +1,9 @@
 /***********************************  WORKS ******************************************/
-
+console.log("ffff");
 /* fetch la route WORKS de l'API */
 let works = await fetch("http://localhost:5678/api/works").then((works) =>
   works.json()
 );
-
 /* Fonction qui permet la creation de la gallery dynamiquement*/
 function loadDataWorks(works) {
   document.querySelector(".gallery").innerHTML = "";
@@ -178,16 +177,16 @@ if (window.sessionStorage.getItem("token") !== null) {
       e.preventDefault();
 
       // Récupérer les données des inputs pour la création du nouvel élément
-      const modalInputImg = document.getElementById("modal_formPhoto").files[0];
-      const modalInputTitle = document.getElementById("modal_titleForm").value;
-      const modalInputCategorie = document.getElementById(
+      let modalInputImg = document.getElementById("modal_formPhoto").files[0];
+      let modalInputTitle = document.getElementById("modal_titleForm");
+      let modalInputCategorie = document.getElementById(
         "modal_categorieForm"
       ).value;
 
       // Création du formData à envoyer
       const formData = new FormData();
       formData.append("image", modalInputImg);
-      formData.append("title", modalInputTitle);
+      formData.append("title", modalInputTitle.value);
       formData.append("category", modalInputCategorie);
 
       let response = await fetch("http://localhost:5678/api/works", {
@@ -198,9 +197,10 @@ if (window.sessionStorage.getItem("token") !== null) {
         },
         body: formData,
       });
-      console.log(response);
+
+      modalInputTitle.value = "";
       const modalPreview = document.querySelector(".modal_preview");
-      modalPreview.setAttribute("style", "display: none");
+      modalPreview.style.display = "none";
       const modalPreviewPhoto = document.querySelector(".modal_preview-photo");
       modalPreviewPhoto.src = "";
       const modal2 = document.querySelector("#modal_2");
@@ -209,7 +209,9 @@ if (window.sessionStorage.getItem("token") !== null) {
       gallery.innerText = "";
       const modalGallery = document.querySelector(".modal_gallery");
       modalGallery.innerText = "";
-
+      works = await fetch("http://localhost:5678/api/works").then((works) =>
+        works.json()
+      );
       loadDataWorks(works);
       loadDataModal(works);
       deleteProject();
@@ -222,43 +224,23 @@ if (window.sessionStorage.getItem("token") !== null) {
       deleteProject[i].addEventListener("click", async function (e) {
         e.preventDefault();
         const id = deleteProject[i].id.split("_")[1];
-        await fetch(`http://localhost:5678/api/works/${id}`, {
+        let response = await fetch(`http://localhost:5678/api/works/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: "Bearer " + window.sessionStorage.getItem("token"),
             Accept: "application/json",
           },
         });
+        let works = await fetch("http://localhost:5678/api/works").then(
+          (works) => works.json()
+        );
+        loadDataModal(works);
         const gallery = document.querySelector(".gallery");
         gallery.innerText = "";
-        loadDataModal(works);
         loadDataWorks(works);
       });
     }
   }
-
-  // Supprimer la gallery
-  function deleteGallery() {
-    for (let i = 0; i < works.length; i++) {
-      const id = works[i].id;
-      fetch(`http://localhost:5678/api/works/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + window.sessionStorage.getItem("token"),
-          Accept: "application/json",
-        },
-      });
-      const gallery = document.querySelector(".gallery");
-      gallery.innerText = "";
-      const modalGallery = document.querySelector(".modal_gallery");
-      modalGallery.innerText = "";
-      loadDataModal(works);
-      loadDataWorks(works);
-    }
-  }
-  document
-    .querySelector(".modal_delete-gallery")
-    .addEventListener("click", deleteGallery);
 
   // close modal
   document.querySelector("#modal_1").addEventListener("click", function (e) {
@@ -269,6 +251,7 @@ if (window.sessionStorage.getItem("token") !== null) {
     ) {
       modal1.style.display = "none";
     }
+    deleteProject();
   });
   document.querySelector("#modal_2").addEventListener("click", function (e) {
     const modal2 = document.querySelector("#modal_2");
@@ -280,5 +263,6 @@ if (window.sessionStorage.getItem("token") !== null) {
       const modalPreview = document.querySelector(".modal_preview");
       modalPreview.setAttribute("style", "display: none");
     }
+    deleteProject();
   });
 }
