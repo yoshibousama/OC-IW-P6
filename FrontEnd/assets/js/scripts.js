@@ -1,13 +1,17 @@
 /***********************************  WORKS ******************************************/
-console.log("ffff");
+
 /* fetch la route WORKS de l'API */
 let works = await fetch("http://localhost:5678/api/works").then((works) =>
   works.json()
 );
+// console.log(works);
+
 /* Fonction qui permet la creation de la gallery dynamiquement*/
 function loadDataWorks(works) {
   document.querySelector(".gallery").innerHTML = "";
   for (let i = 0; i < works.length; i++) {
+    // console.log(works[i]);
+
     const gallery = document.querySelector(".gallery");
     const figureElm = document.createElement("figure");
     const imgElm = document.createElement("img");
@@ -29,7 +33,7 @@ loadDataWorks(works);
 let categories = await fetch("http://localhost:5678/api/categories").then(
   (categories) => categories.json()
 );
-loadDataCategorie(categories);
+// console.log(categories);
 
 /* fonction qui permet la creation des boutons dynamiquement*/
 function loadDataCategorie(categories) {
@@ -69,6 +73,7 @@ function loadDataCategorie(categories) {
     });
   }
 }
+loadDataCategorie(categories);
 
 /***********************************  ADMIN ******************************************/
 
